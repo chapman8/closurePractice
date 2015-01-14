@@ -85,7 +85,7 @@ var complicated = function(func1) {
   }
 }
 
-var new1 =  complicated(function() {
+var new1 = complicated(function() {
   alert("Hi");
 });
 
@@ -93,6 +93,17 @@ new1();
 
 // Part2
 
+var complicated = function(counter, func1) { // the inner function has access to the outer parameter. 
+  return function() {                        // when a number is passed in for counter --> counter = that number.
+    if (counter) { //if counter = number passed in is positive
+      func1();
+      counter--; // subtracts 1 from counter.
+    }
+    console.log('STAHHP');
+  }
+}
+
+/* OR
 var complicated = function(N, func1) {
   counter = N;
   return function() {
@@ -103,11 +114,13 @@ var complicated = function(N, func1) {
     console.log('STAHHP');
   }
 }
+*/
 
-var new1 = complicated(2, function() {
+var new1 = complicated(2, function() { //counter now equals --> counter = 2. 
   alert("Hi");
 });
 
-new1();
+new1(); // 1: if counter is positive(2) = true it runs func1 then subtracts 1 from counter. 2: counter = 1, runs func 
+        // and subtracts 1. 3: counter = 0 or falsy. if statement is now false so it jumps to console.log.
 
 
