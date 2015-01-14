@@ -69,10 +69,45 @@ var makeCounter = function() {
 /*
   Write a function that accepts another function as it's only argument and returns a new function
   (which invokes the original function that was passed in) that can only ever be executed once.
+
   Once completed, add a second arguments that allows the function to be invoked N number of times.
   After the function has been called N number of times, console.log('STAHHP');
 */
 
+var complicated = function(func1) {
+  counter = 0;
+  return function() {
+    counter = counter + 1;
+    if (counter <= 1) {
+      return func1();
+    }
+    return false;
+  }
+}
 
+var new1 =  complicated(function() {
+  alert("Hi");
+});
+
+new1();
+
+// Part2
+
+var complicated = function(N, func1) {
+  counter = N;
+  return function() {
+    counter = counter - 1;
+    if (counter >= 0) {
+      return func1();
+    }
+    console.log('STAHHP');
+  }
+}
+
+var new1 = complicated(2, function() {
+  alert("Hi");
+});
+
+new1();
 
 
